@@ -39,10 +39,13 @@ setuptools.setup(
             'torch/*.inl',
             'torch/*.cpp',
             'tensorflow/*.cu',
+            '*.whl',  # TODO: any way to script this being installed during setup? no point to include otherwise
         ] + (['lib/*.lib'] if os.name == 'nt' else [])
     },
     include_package_data=True,
-    install_requires=['numpy'],  # note: can't require torch here as it will install torch even for a TensorFlow container
+    install_requires=['numpy', 
+        'nvdiffrast_plugin',  # TODO: any way to use included wheel?
+    ],  # note: can't require torch here as it will install torch even for a TensorFlow container
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",

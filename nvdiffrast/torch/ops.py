@@ -114,11 +114,16 @@ def _get_plugin(gl=False):
             pass
 
     # Compile and load.
-    source_paths = [os.path.join(os.path.dirname(__file__), fn) for fn in source_files]
-    torch.utils.cpp_extension.load(name=plugin_name, sources=source_paths, extra_cflags=opts, extra_cuda_cflags=opts+['-lineinfo'], extra_ldflags=ldflags, with_cuda=True, verbose=False)
+    import pdb; pdb.set_trace()
+    # print(f"building {plugin_name} at: {torch.utils.cpp_extension._get_build_directory(plugin_name, verbose=True)}")
+    # source_paths = [os.path.join(os.path.dirname(__file__), fn) for fn in source_files]
+    # torch.utils.cpp_extension.load(name=plugin_name, sources=source_paths, extra_cflags=opts, extra_cuda_cflags=opts+['-lineinfo'], extra_ldflags=ldflags, with_cuda=True, verbose=False)
+
+    print(f"loading {plugin_name} from precompiled")
 
     # Import, cache, and return the compiled module.
     _cached_plugin[gl] = importlib.import_module(plugin_name)
+    print(f"found {plugin_name} at {_cached_plugin[gl].__file__}")
     return _cached_plugin[gl]
 
 #----------------------------------------------------------------------------
