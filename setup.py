@@ -39,7 +39,7 @@ setuptools.setup(
             'torch/*.inl',
             'torch/*.cpp',
             'tensorflow/*.cu',
-            '*.whl',  # TODO: any way to script this being installed during setup? no point to include otherwise
+            # '*.whl',  # TODO: any way to script this being installed during setup? no point to include otherwise
         ] + (['lib/*.lib'] if os.name == 'nt' else [])
     },
     include_package_data=True,
