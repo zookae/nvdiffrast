@@ -40,7 +40,8 @@ def _get_plugin(gl=False):
         if os.system("where cl.exe >nul 2>nul") != 0:
             cl_path = find_cl_path()
             if cl_path is None:
-                raise RuntimeError("Could not locate a supported Microsoft Visual C++ installation")
+                # raise RuntimeError("Could not locate a supported Microsoft Visual C++ installation")
+                logging.getLogger('nvdiffrast').warning("Could not locate a supported Microsoft Visual C++ installation. JIT compilation will fail.")
             os.environ['PATH'] += ';' + cl_path
 
     # Compiler options.
@@ -114,7 +115,6 @@ def _get_plugin(gl=False):
             pass
 
     # Compile and load.
-    import pdb; pdb.set_trace()
     # print(f"building {plugin_name} at: {torch.utils.cpp_extension._get_build_directory(plugin_name, verbose=True)}")
     # source_paths = [os.path.join(os.path.dirname(__file__), fn) for fn in source_files]
     # torch.utils.cpp_extension.load(name=plugin_name, sources=source_paths, extra_cflags=opts, extra_cuda_cflags=opts+['-lineinfo'], extra_ldflags=ldflags, with_cuda=True, verbose=False)
