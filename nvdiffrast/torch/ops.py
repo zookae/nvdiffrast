@@ -42,7 +42,8 @@ def _get_plugin(gl=False):
             if cl_path is None:
                 # raise RuntimeError("Could not locate a supported Microsoft Visual C++ installation")
                 logging.getLogger('nvdiffrast').warning("Could not locate a supported Microsoft Visual C++ installation. JIT compilation will fail.")
-            os.environ['PATH'] += ';' + cl_path
+            else:
+                os.environ['PATH'] += ';' + cl_path
 
     # Compiler options.
     opts = ['-DNVDR_TORCH']
