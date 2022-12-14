@@ -1,7 +1,6 @@
 import os
 from setuptools import setup
 from torch.utils import cpp_extension
-import nvdiffrast
 
 plugin_name = "nvdiffrast_plugin"
 source_files = [
@@ -36,7 +35,7 @@ ldflags = []
 
 os.environ["TORCH_CUDA_ARCH_LIST"] = "7.5 8.0 8.6+PTX"
 setup(name=plugin_name,
-    version=nvdiffrast.__version__,
+    version="0.3.0",  # find from main package
     ext_modules=[cpp_extension.CUDAExtension(
         plugin_name,
         source_files,
